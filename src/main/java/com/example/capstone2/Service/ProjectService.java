@@ -26,6 +26,9 @@ public class ProjectService {
         if (userRepository.findUserById(project.getClientId()) == null) {
             throw new ApiException("Client not found");
         }
+        if (userRepository.findUserById(project.getClientId()).getRole().equals("FREELANCER")){
+            throw new ApiException("unauthorized  to User");
+        }
         projectRepository.save(project);
     }
 
@@ -36,6 +39,9 @@ public class ProjectService {
         }
         if (userRepository.findUserById(project.getClientId()) == null) {
             throw new ApiException("Client not found");
+        }
+        if (userRepository.findUserById(project.getClientId()).getRole().equals("FREELANCER")){
+            throw new ApiException("unauthorized  to User");
         }
         oldProject.setClientId(project.getClientId());
         oldProject.setTitle(project.getTitle());
