@@ -34,6 +34,7 @@ public class UserService {
         }
         oldUser.setName(user.getName());
         oldUser.setEmail(user.getEmail());
+        oldUser.setPhoneNumber(user.getPhoneNumber());
         oldUser.setPassword(user.getPassword());
         oldUser.setRole(user.getRole());
         oldUser.setBio(user.getBio());

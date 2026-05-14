@@ -28,6 +28,9 @@ public class User {
     @Email
     @Column(columnDefinition = "varchar(45) not null unique")
     private String email ;
+    @NotEmpty(message = "phoneNumber can not be empty ")
+    @Pattern(regexp = "^\\d{10}$", message = "Phone number must be exactly 10 digits")
+    private String phoneNumber ;
     @NotEmpty(message = "password can not be empty ")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     private  String password ;

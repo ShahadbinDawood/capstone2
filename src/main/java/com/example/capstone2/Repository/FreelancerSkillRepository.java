@@ -4,6 +4,9 @@ import com.example.capstone2.Model.FreelancerSkill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FreelancerSkillRepository extends JpaRepository<FreelancerSkill,Integer> {
+    FreelancerSkill findFreelancerSkillById(Integer id);
 }
