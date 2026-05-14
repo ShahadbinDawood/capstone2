@@ -13,12 +13,13 @@ import java.util.List;
 
 public class UserService {
     private final UserRepository userRepository;
+    private final EmailValidationService emailValidationService;
     public List<User>  getAllUser (){
         return userRepository.findAll();
     }
     public void addUser(User user){
-        if (user==null){
-            throw new ApiException("User not found");
+        if (!emailValidationService.isValidEmail(user.getEmail())) {
+            throw new ApiException("Email is not valid or does not exist");
         }
         userRepository.save(user);
 
@@ -27,6 +28,9 @@ public class UserService {
         User oldUser = userRepository.findUserById(id);
         if (oldUser==null){
             throw new ApiException("User not found");
+        }
+        if (!emailValidationService.isValidEmail(user.getEmail())) {
+            throw new ApiException("Email is not valid or does not exist");
         }
         oldUser.setName(user.getName());
         oldUser.setEmail(user.getEmail());
