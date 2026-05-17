@@ -5,6 +5,7 @@ import com.example.capstone2.Model.Review;
 import com.example.capstone2.Repository.ContractRepository;
 import com.example.capstone2.Repository.ReviewRepository;
 import com.example.capstone2.Repository.UserRepository;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +65,30 @@ public class ReviewService {
             throw new ApiException("Review  not found");
         }
         reviewRepository.delete(review);
+    }
+    public List<Review> getUserReview (Integer userId){
+        List<Review> review = reviewRepository.findReviewByRevieweeId(userId);
+        if (userRepository.findUserById(userId) == null) {
+            throw new ApiException("User not found");
+        }
+        if (review.isEmpty()){
+            throw new ApiException("no Reviews are found");
+        }
+        return review ;
+
+    }
+    public Double averageRating(Integer userId){
+
+        if (userRepository.findUserById(userId) == null) {
+            throw new ApiException("User not found");
+        }
+        List<Review> review = reviewRepository.findReviewByRevieweeId(userId);
+        if (review.isEmpty()){
+            throw new ApiException("no Reviews are found");
+        }
+        int count = review.size();
+        double sum =0;
+        for (Review r :review) sum = r.getRating() + sum;
+        return (sum/count);
     }
 }

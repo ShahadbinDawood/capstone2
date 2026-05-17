@@ -44,4 +44,14 @@ public class FreelancerProfileController {
         freelancerProfileService.deleteFreelancerProfile(id);
         return ResponseEntity.status(200).body(new ApiResponse("Freelancer Profile deleted successfully"));
     }
+    @GetMapping("/skill/{skillId}")
+    public ResponseEntity<?> freelancerWithSkill (@PathVariable Integer skillId){
+        return ResponseEntity.status(200).body(freelancerProfileService.freelancerWithSkill(skillId));
+
+    }
+    @GetMapping("/rate-lower/{hourlyRate}")
+    public ResponseEntity<?> profileHourlyRateLower(double hourlyRate){
+        return ResponseEntity.status(200).body(freelancerProfileService.profileHourlyRateLower(hourlyRate));
+
+    }
 }

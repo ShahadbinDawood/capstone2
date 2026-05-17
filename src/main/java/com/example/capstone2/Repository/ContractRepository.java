@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface ContractRepository extends JpaRepository<Contract,Integer> {
     Contract findContractById(Integer id);
-
+    List<Contract> findContractByFreelancerId(Integer freelancerId);
+    List<Contract> findContractByClientId(Integer clientId);
+    Contract findContractByProjectId(Integer projectId);
 }

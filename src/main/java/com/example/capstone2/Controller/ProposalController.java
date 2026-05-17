@@ -29,7 +29,7 @@ public class ProposalController {
             return ResponseEntity.status(400).body(message);
         }
         proposalService.addProposal(proposal);
-        return ResponseEntity.status(200).body(new ApiResponse("Review added successfully"));
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal added successfully"));
     }
 
     @PutMapping("/update/{id}")
@@ -39,12 +39,41 @@ public class ProposalController {
             return ResponseEntity.status(400).body(message);
         }
         proposalService.updateProposal(id, proposal);
-        return ResponseEntity.status(200).body(new ApiResponse("Review updated successfully"));
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal updated successfully"));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProposal(@PathVariable Integer id) {
         proposalService.deleteProposal(id);
-        return ResponseEntity.status(200).body(new ApiResponse("Review deleted successfully"));
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal deleted successfully"));
+    }
+
+    @PostMapping("/apply/{freelancerId}/{projectId}")
+    public ResponseEntity<?> applyForProject(@PathVariable Integer freelancerId, @PathVariable Integer projectId) {
+        proposalService.applyForProject(freelancerId, projectId);
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal  applied successfully"));
+    }
+
+    @PutMapping("/accept/{id}")
+    public ResponseEntity<?> acceptProposal(@PathVariable Integer id) {
+        proposalService.acceptProposal(id);
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal   accepted successfully"));
+    }
+
+    @PutMapping("/reject/{id}/{userId}")
+    public ResponseEntity<?> rejectProposal(@PathVariable Integer id, @PathVariable Integer userId) {
+        proposalService.rejectProposal(id, userId);
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal  rejected successfully"));
+    }
+
+    @PutMapping("/withdraw/{id}/{userId}")
+    public ResponseEntity<?> withdrawProposal(@PathVariable Integer id, @PathVariable Integer userId) {
+        proposalService.withdrawProposal(id, userId);
+        return ResponseEntity.status(200).body(new ApiResponse("Proposal  withdraw successfully"));
+    }
+
+    @GetMapping("/proposal-project/{id}")
+    public ResponseEntity<?> getProposalsByProject(@PathVariable Integer id) {
+        return ResponseEntity.status(200).body(proposalService.projectProposal(id));
     }
 }

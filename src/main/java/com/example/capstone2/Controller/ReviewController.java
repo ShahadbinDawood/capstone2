@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewService reviewService;
+
     @GetMapping("/all")
     public ResponseEntity<?> getAllReview() {
         return ResponseEntity.status(200).body(reviewService.getAllReview());
@@ -43,5 +44,14 @@ public class ReviewController {
     public ResponseEntity<?> deleteReview(@PathVariable Integer id) {
         reviewService.deleteReview(id);
         return ResponseEntity.status(200).body(new ApiResponse("Review deleted successfully"));
+    }
+    @GetMapping("/user-review/{userId}")
+    public ResponseEntity<?> getUserReview(@PathVariable Integer userId) {
+        return ResponseEntity.status(200).body(reviewService.getUserReview(userId));
+
+    }
+    @GetMapping("/user-average/{userId}")
+    public ResponseEntity<?> averageRating(@PathVariable Integer userId){
+        return ResponseEntity.status(200).body(reviewService.averageRating(userId));
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface FreelancerSkillRepository extends JpaRepository<FreelancerSkill,Integer> {
     FreelancerSkill findFreelancerSkillById(Integer id);
+    List<FreelancerSkill> findFreelancerSkillsBySkillId(Integer skillId);
 }

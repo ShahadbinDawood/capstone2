@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project,Integer> {
         Project findProjectById(Integer id);
+        List<Project> findProjectsByStatus(String status);
+        List<Project> findProjectsByBudgetBetween(int budgetAfter, int budgetBefore);
 }

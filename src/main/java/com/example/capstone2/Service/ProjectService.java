@@ -59,4 +59,35 @@ public class ProjectService {
         }
         projectRepository.delete(project);
     }
+    public List<Project> getOpenProject(){
+        List<Project> projects = projectRepository.findProjectsByStatus("OPEN");
+        if (projects.isEmpty()) {
+            throw new ApiException("no open project are found");
+        }
+        return projects;
+
+    }
+    public List<Project> budgetRange(int min,int max){
+        List<Project> projects = projectRepository.findProjectsByBudgetBetween(min, max);
+        if (projects.isEmpty()) {
+            throw new ApiException("no open project are found");
+        }
+        return projects;
+
+    }
+    public void cancelProject (Integer projectId ,Integer clientId){
+        if (userRepository.findUserById(clientId) == null) {
+            throw new ApiException("Client not found");
+        }
+        Project project = projectRepository.findProjectById(projectId);
+        if (project==null){
+            throw new ApiException("project not found ");
+        }
+        if (!project.getClientId().equals(clientId)){
+            throw new ApiException("you are not  authorized  ");
+        }
+        project.setStatus("CANCELLED");
+        projectRepository.save(project);
+
+    }
 }

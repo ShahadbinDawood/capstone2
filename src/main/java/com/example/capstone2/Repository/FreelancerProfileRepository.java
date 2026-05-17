@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface FreelancerProfileRepository extends JpaRepository<FreelancerProfile,Integer> {
     FreelancerProfile findFreelancerProfileById(Integer id);
+    FreelancerProfile findFreelancerProfilesByUserId(Integer userId);
+
+    List<FreelancerProfile> findFreelancerProfilesByHourlyRateLessThanEqual(double hourlyRateIsGreaterThan);
+
 }

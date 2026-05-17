@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface ProposalRepository  extends JpaRepository<Proposal,Integer> {
     Proposal findProposalById(Integer id);
+
+    List<Proposal> getProposalsByProjectId(Integer projectId);
+    Proposal findProposalByProjectIdAndFreelancerId(Integer projectId, Integer freelancerId);
 }

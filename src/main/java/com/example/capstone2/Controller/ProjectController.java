@@ -44,4 +44,18 @@ public class ProjectController {
         projectService.deleteProject(id);
         return ResponseEntity.status(200).body(new ApiResponse("User deleted successfully"));
     }
+    @GetMapping("/open")
+    public ResponseEntity<?> getOpenProject(){
+        return ResponseEntity.status(200).body(projectService.getOpenProject());
+    }
+    @GetMapping("/budget-range/{min}/{max }")
+    public ResponseEntity<?> budgetRange(@PathVariable int min ,@PathVariable int  max ){
+        return ResponseEntity.status(200).body(projectService.budgetRange(min,max));
+    }
+    @PutMapping("/cancel/{projectId}/{clientId}")
+    public ResponseEntity<?> cancelProject (@PathVariable Integer projectId , @PathVariable Integer clientId){
+        projectService.cancelProject(projectId, clientId);
+        return ResponseEntity.status(200).body(new ApiResponse("project canceled successfully"));
+
+    }
 }
